@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Pink CV - Flower Fall</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-pink: #ff85a2;
+            --dark-pink: #f72585;
+            --soft-pink: #ffe5ec;
+            --text-main: #4a4a4a;
+            --bg-gradient: linear-gradient(135deg, #fff5f8 0%, #fce4ec 100%);
+        }
+
+        /* --- Animasi Bunga Jatuh --- */
+        .flower-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .flower {
+            position: absolute;
+            background-color: #ffb7c5;
+            border-radius: 150% 0 150% 0;
+            opacity: 0.7;
+            filter: drop-shadow(0 0 5px rgba(255,182,197,0.5));
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% {
+                transform: translateY(110vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* --- Style Dasar CV --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        .cv-card {
+            position: relative;
+            z-index: 1; /* Di atas bunga */
+            background: rgba(255, 255, 255, 0.85);
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-wrap: wrap;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(247, 37, 133, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* Sisi Kiri */
+        .left-panel {
+            background: linear-gradient(180deg, var(--dark-pink) 0%, var(--primary-pink) 100%);
+            color: white;
+            flex: 1;
+            min-width: 300px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .profile-frame {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 20px;
+            border: 6px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            overflow: hidden;
+            background: #fff;
+            animation: scaleIn 1s ease-out 0.3s both;
+        }
+
+        .profile-frame img { width: 100%; height: 100%; object-fit: cover; }
+        .name { font-size: 1.8rem; font-weight: 600; margin-bottom: 5px; animation: fadeInUp 0.6s ease-out 0.5s both; }
+        .job-title { font-weight: 300; letter-spacing: 1px; margin-bottom: 30px; opacity: 0.9; animation: fadeInUp 0.6s ease-out 0.6s both; }
+
+        .contact-section { text-align: left; font-size: 0.9rem; animation: fadeInUp 0.6s ease-out 0.7s both; }
+        .contact-item { margin-bottom: 15px; display: flex; align-items: center; transition: 0.3s; }
+        .contact-item:hover { transform: translateX(10px); }
+        .contact-item i { width: 25px; margin-right: 10px; text-align: center; }
+
+        /* Sisi Kanan */
+        .right-panel { flex: 2; min-width: 350px; padding: 40px; background: rgba(255, 255, 255, 0.5); }
+        h2 { color: var(--dark-pink); font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; border-bottom: 2px solid var(--soft-pink); padding-bottom: 8px; }
+        .section { margin-bottom: 30px; animation: fadeInUp 0.8s ease-out 0.8s both; }
+
+        .timeline-item {
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 3px solid var(--soft-pink);
+            transition: 0.3s;
+        }
+        .timeline-item:hover { border-left-color: var(--dark-pink); }
+        .timeline-header { display: flex; justify-content: space-between; font-weight: 600; color: #333; font-size: 0.9rem; }
+        .timeline-date { color: var(--dark-pink); font-size: 0.8rem; }
+
+        .skills-container { display: flex; flex-wrap: wrap; gap: 8px; }
+        .skill-pill {
+            background: var(--soft-pink);
+            color: var(--dark-pink);
+            padding: 5px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .skill-pill:hover { background: var(--dark-pink); color: white; transform: scale(1.1); }
+
+        @media (max-width: 600px) {
+            .cv-card { flex-direction: column; }
+            body { padding: 20px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="flower-container" id="flower-area"></div>
+
+<div class="cv-card">
+    <div class="left-panel">
+        <div class="profile-frame">
+            <img src="pipit.jpeg" alt="Profile">
+        </div>
+        <h1 class="name">pipit rahma mufvida</h1>
+        <p class="job-title">Pelajar SMK Grafika Desa Putera</p>
+
+        <div class="contact-section">
+            <div class="contact-item"><i class="fas fa-map-marker-alt"></i> Depok, Indonesia</div>
+            <div class="contact-item"><i class="fas fa-envelope"></i> rahmamufvidapipit@email.com</div>
+            <div class="contact-item"><i class="fas fa-phone"></i> +62 881 0100 57072</div>
+            <div class="contact-item"><i class="fab fa-instagram"></i> @bullpunch_1</div>
+        </div>
+    </div>
+
+    <div class="right-panel">
+        <div class="section">
+            <h2><i class="fas fa-user-circle" style="margin-right: 10px;"></i> Tentang Saya</h2>
+            <p style="font-size: 0.9rem; line-height: 1.6;">
+                Saya Pipit Rahma Mufvida, siswa SMK Grafika Desa Putera jurusan Teknik Grafis Memiliki pengalaman magang di PT BINTANG SEMPURNA bidang desain grafis, percetakan offset, serta tata letak, dan siap terus belajar di industri kreatif..
+            </p>
+        </div>
+
+        <div class="section" style="animation-delay: 1s;">
+            <h2><i class="fas fa-graduation-cap" style="margin-right: 10px;"></i> Riwayat Pendidikan</h2>
+            <div class="timeline-item">
+                <div class="timeline-header"><span>Madrasah Ibtidaiyah NURUL FALAH</span><span class="timeline-date">2013 - 2019</span></div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-header"><span>SMP MUTIARA BANGSA</span><span class="timeline-date">2019 - 2023</span></div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-header"><span>SMK GRAFIKA DESA PUTERA</span><span class="timeline-date">2023 - 2026</span></div>
+                <p style="font-size: 0.8rem; color: #666;">Jurusan: DESAIN GRAFIS</p>
+            </div>
+        </div>
+
+        <div class="section" style="animation-delay: 1.2s;">
+            <h2><i class="fas fa-star" style="margin-right: 10px;"></i> Keahlian</h2>
+            <div class="skills-container">
+                <div class="skill-pill">Microsoft Excel</div>
+                <div class="skill-pill">Microsoft Word</div>
+                <div class="skill-pill">Canva Design</div>
+                <div class="skill-pill">Adobe Illustrator</div>
+                 <div class="skill-pill">Adobe Photoshop</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Script untuk membuat bunga secara random
+    function createFlower() {
+        const container = document.getElementById('flower-area');
+        const flower = document.createElement('div');
+        
+        // Ukuran random
+        const size = Math.random() * 15 + 10 + 'px';
+        flower.classList.add('flower');
+        flower.style.width = size;
+        flower.style.height = size;
+        
+        // Posisi horizontal random
+        flower.style.left = Math.random() * 100 + 'vw';
+        
+        // Durasi jatuh random (5 - 10 detik)
+        const duration = Math.random() * 5 + 5 + 's';
+        flower.style.animationDuration = duration;
+        
+        container.appendChild(flower);
+
+        // Hapus bunga setelah animasi selesai agar tidak menumpuk di memori
+        setTimeout(() => {
+            flower.remove();
+        }, 10000);
+    }
+
+    // Munculkan bunga setiap 300ms
+    setInterval(createFlower, 300);
+</script>
+
+</body>
+</html>
